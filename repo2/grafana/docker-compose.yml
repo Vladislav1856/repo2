@@ -94,7 +94,7 @@ services:
       - ./grafana:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     environment:
-      GF_SERVER_URL: http://grafana/grafana
+      GF_SERVER_ROOT_URL: http://grafana/grafana
     container_name: grafana
     hostname: grafana
     restart: unless-stopped
@@ -108,10 +108,12 @@ services:
     container_name: nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./site:/usr/share/nginx/html
     depends_on:
       - grafana
     ports:
-      - 80:80
+      - "80:80"
     networks:
       - default
 
