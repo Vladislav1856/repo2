@@ -63,6 +63,8 @@ services:
     expose:
       - 9090
     restart: unless-stopped
+    depends_on:
+      - postgres
     networks:
       - default
 
